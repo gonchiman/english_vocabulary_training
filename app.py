@@ -12,7 +12,7 @@ app = Flask(__name__)
 def index():
     return render_template(
         'index.html',
-        page_title='English Vocabulary Training'
+        page_title='Home'
     )
 
 
@@ -35,7 +35,7 @@ def registration():
 
     return render_template(
         'registration.html',
-        page_title='Register Word',
+        page_title='Registration',
         registration_result=registration_result
     )
 
