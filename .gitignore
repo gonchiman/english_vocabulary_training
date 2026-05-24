@@ -1,0 +1,30 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# virtual environment
+.venv/
+venv/
+env/
+
+# editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# temporary files
+*.tmp
+*.log
+
+# generated images
+classes.png
+packages.png
