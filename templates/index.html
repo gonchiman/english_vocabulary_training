@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/index.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="link-background">
+    <h2 style="margin-left: 16px;">Site Contents</h2>
+    <ul>
+        <li><a href="/registration">Register Word</a></li>
+    </ul>
+</div>
+
+{% endblock %}

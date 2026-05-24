@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/registration.css') }}">
+{% endblock %}
+
+{% block content %}
+<form action="/registration" method="post">
+    <div>
+        <label for="word_type">Word Type:</label>
+        <select id="word_type" name="word_type" required>
+            <option value="parent">Parent</option>
+            <option value="child">Child</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="word">Word:</label>
+        <input type="text" id="word" name="word" required>
+    </div>
+
+    <div>
+        <label for="parent">Parent:</label>
+        <input type="text" id="parent" name="parent">
+    </div>
+
+    <button type="submit">Register</button>
+</form>
+{% endblock %}
