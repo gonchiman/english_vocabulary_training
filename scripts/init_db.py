@@ -17,8 +17,12 @@ TABLE_DEFINITIONS = (
 
 def init_db():
     DB_PATH.parent.mkdir(exist_ok=True)
-    conn = sqlite3.connect(DB_PATH)
+    
+    if DB_PATH.exists():
+        DB_PATH.unlink()
 
+    conn = sqlite3.connect(DB_PATH)
+    
     create_tables(conn)
 
     conn.commit()
