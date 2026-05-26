@@ -5,29 +5,35 @@
 {% endblock %}
 
 {% block content %}
-<form action="/registration" method="post">
-    <div>
-        <label for="registration_type">Registration Type:</label>
-        <select id="registration_type" name="registration_type" required>
-            <option value="parent">parent</option>
-            <option value="child">child</option>
-        </select>
-    </div>
+<form action="/parents_registration" method="post">
+    <legend>Register a Parent Word</legend>
 
-    <div>
-        <label for="word">Word:</label>
-        <input type="text" id="word" name="word" required>
-    </div>
+    <label for="word">Word:</label>
+    <input type="text" id="word" name="word" required>
 
-    <div>
-        <label for="parent">Parent:</label>
-        <input type="text" id="parent" name="parent">
-    </div>
+    <label for="part_of_speech">Part of Speech:</label>
+    <select id="part_of_speech" name="part_of_speech" required>
+        {% for part in parts_of_speech %}
+            <option value="{{ part.value }}">{{ part.value }}</option>
+        {% endfor %}
+    </select>
 
     <button type="submit">Register</button>
+
+    <p>Registration Result: {{ registration_result_parents }}</p>
 </form>
 
-<div class="result">
-    <p>Registration Result: {{ registration_result }}</p>
-</div>
+<form action="/children_registration" method="post">
+    <legend>Register a Child Word</legend>
+
+    <label for="word">Word:</label>
+    <input type="text" id="word" name="word" required>
+
+    <label for="parent">Parent:</label>
+    <input type="text" id="parent" name="parent" required>
+
+    <button type="submit">Register</button>
+
+    <p>Registration Result: {{ registration_result_children }}</p>
+</form>
 {% endblock %}

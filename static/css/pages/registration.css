@@ -1,10 +1,14 @@
 form {
+    margin-bottom: 16px;
     padding: var(--panel-padding);
     border-radius: var(--panel-border-radius);
     width: 400px;
     background-color: var(--panel-bg);
     font-weight: bold;
 
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 select {

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 
+from src.constants.parts_of_speech import PartsOfSpeech
 from src.constants.word_types import RegistrationTypes
 from src.repositories.children_repository import ChildrenRepository
 from src.repositories.parents_repository import ParentRepository
@@ -18,25 +19,29 @@ def index():
 
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
-    selected_registration_type = request.form.get("registration_type", None)
-    input_word = request.form.get("word")
-    input_parent = request.form.get("parent", None)
-    registration_result = ""
-
-    if selected_registration_type == RegistrationTypes.PARENT:
-        ParentRepository.insert([input_word])
-        registration_result = "Success"
-    elif selected_registration_type == RegistrationTypes.CHILD:
-        if not input_parent:
-            registration_result = "Failed"
-        else:
-            ChildrenRepository.insert([input_word, input_parent])
-            registration_result = "Success"
-
     return render_template(
         'registration.html',
         page_title='Registration',
-        registration_result=registration_result
+        parts_of_speech=PartsOfSpeech,
+        registration_result_parents="",
+        registration_result_children=""
+    )
+
+
+@app.route('/parents_registration', methods=['GET', 'POST'])
+def parents_registration():
+    input_word = request.form.get("word")
+    input_part_of_speech = request.form.get("part_of_speech", default=PartsOfSpeech.NOUN.value)
+    registration_result_parents = ""
+
+    ParentRepository.insert([input_word, input_part_of_speech])
+    registration_result_parents = "Success"
+
+    return render_template(
+        'registration.html',
+        page_title='Parents Registration',
+        registration_result_parents=registration_result_parents,
+        parts_of_speech=PartsOfSpeech
     )
 
 
