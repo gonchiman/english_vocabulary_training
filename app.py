@@ -25,8 +25,8 @@ def registration():
         page_title='Registration',
         parts_of_speech=PartsOfSpeech,
         parents=ParentRepository.find_values_by_column("word"),
-        registration_result_parents="",
-        registration_result_children=""
+        registration_result_parents="Nothing registered yet.",
+        registration_result_children="Nothing registered yet."
     )
 
 
@@ -38,14 +38,16 @@ def parents_registration():
 
     WordRegistrationService.register_multiple_words_to_parents(input_word, input_part_of_speech)
 
-    registration_result_parents = "Success"
+    registered_words = ', '.join(input_word.replace(' ', '').split(','))
+    registration_result_parents = f"Successfully registered words: {registered_words}"
 
     return render_template(
         'registration.html',
         page_title='Registration',
-        registration_result_parents=registration_result_parents,
         parts_of_speech=PartsOfSpeech,
-        parents=ParentRepository.find_values_by_column("word")
+        parents=ParentRepository.find_values_by_column("word"),
+        registration_result_parents=registration_result_parents,
+        registration_result_children="Nothing registered yet."
     )
 
 
@@ -57,14 +59,16 @@ def children_registration():
 
     WordRegistrationService.register_multiple_words_to_children(input_word, input_parent)
 
-    registration_result_children = "Success"
+    registered_words = ', '.join(input_word.replace(' ', '').split(','))
+    registration_result_children = f"Successfully registered words: {registered_words}"
 
     return render_template(
         'registration.html',
         page_title='Registration',
-        registration_result_children=registration_result_children,
         parts_of_speech=PartsOfSpeech,
-        parents=ParentRepository.find_values_by_column("word")
+        parents=ParentRepository.find_values_by_column("word"),
+        registration_result_children=registration_result_children,
+        registration_result_parents="Nothing registered yet."
     )
 
 
