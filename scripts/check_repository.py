@@ -7,5 +7,7 @@ sys.path.append(str(BASE_DIR))
 
 from src.repositories.parents_repository import ParentRepository
 
+ParentRepository.insert(["test", "noun"])
 
-ParentRepository.insert(["word"])
+parents = ParentRepository.find_values_by_column("word")
+print(parents)
