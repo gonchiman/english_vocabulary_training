@@ -23,6 +23,7 @@ def registration():
         'registration.html',
         page_title='Registration',
         parts_of_speech=PartsOfSpeech,
+        parents=ParentRepository.find_values_by_column("word"),
         registration_result_parents="",
         registration_result_children=""
     )
@@ -39,9 +40,28 @@ def parents_registration():
 
     return render_template(
         'registration.html',
-        page_title='Parents Registration',
+        page_title='Registration',
         registration_result_parents=registration_result_parents,
-        parts_of_speech=PartsOfSpeech
+        parts_of_speech=PartsOfSpeech,
+        parents=ParentRepository.find_values_by_column("word")
+    )
+
+
+@app.route('/children_registration', methods=['GET', 'POST'])
+def children_registration():
+    input_word = request.form.get("word")
+    input_parent = request.form.get("parent")
+    registration_result_children = ""
+
+    ChildrenRepository.insert([input_word, input_parent])
+    registration_result_children = "Success"
+
+    return render_template(
+        'registration.html',
+        page_title='Registration',
+        registration_result_children=registration_result_children,
+        parts_of_speech=PartsOfSpeech,
+        parents=ParentRepository.find_values_by_column("word")
     )
 
 

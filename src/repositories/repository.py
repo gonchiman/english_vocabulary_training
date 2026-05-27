@@ -22,6 +22,19 @@ class Repository:
         
 
     @classmethod
+    def find_values_by_column(cls, column_name: str) -> list:
+        if not cls.TABLE_NAME:
+            raise ValueError("table_name is not defined")
+        
+        with sqlite3.connect(DB_PATH) as conn:
+            rows = conn.execute(
+                f"SELECT {column_name} FROM {cls.TABLE_NAME}"
+            ).fetchall()
+
+            return [row[0] for row in rows]
+        
+
+    @classmethod
     def insert(cls, row: list):
         if not cls.TABLE_NAME:
             raise ValueError("table_name is not defined")

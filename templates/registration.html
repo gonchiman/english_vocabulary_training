@@ -30,7 +30,11 @@
     <input type="text" id="word" name="word" required>
 
     <label for="parent">Parent:</label>
-    <input type="text" id="parent" name="parent" required>
+    <select id="parent" name="parent" required>
+        {% for parent in parents %}
+            <option value="{{ parent }}">{{ parent }}</option>
+        {% endfor %}
+    </select>
 
     <button type="submit">Register</button>
 
