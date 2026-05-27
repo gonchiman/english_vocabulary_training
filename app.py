@@ -4,6 +4,7 @@ from src.constants.parts_of_speech import PartsOfSpeech
 from src.constants.word_types import RegistrationTypes
 from src.repositories.children_repository import ChildrenRepository
 from src.repositories.parents_repository import ParentRepository
+from src.services.word_registration_service import WordRegistrationService
 
 
 app = Flask(__name__)
@@ -35,7 +36,8 @@ def parents_registration():
     input_part_of_speech = request.form.get("part_of_speech", default=PartsOfSpeech.NOUN.value)
     registration_result_parents = ""
 
-    ParentRepository.insert([input_word, input_part_of_speech])
+    WordRegistrationService.register_multiple_words_to_parents(input_word, input_part_of_speech)
+
     registration_result_parents = "Success"
 
     return render_template(
@@ -53,7 +55,8 @@ def children_registration():
     input_parent = request.form.get("parent")
     registration_result_children = ""
 
-    ChildrenRepository.insert([input_word, input_parent])
+    WordRegistrationService.register_multiple_words_to_children(input_word, input_parent)
+
     registration_result_children = "Success"
 
     return render_template(
