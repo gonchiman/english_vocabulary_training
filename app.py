@@ -51,6 +51,17 @@ def parents_registration():
     )
 
 
+@app.route('/edit', methods=['GET', 'POST'])
+def edit():
+    return render_template(
+        'edit.html',
+        page_title='Edit',
+        parts_of_speech=PartsOfSpeech,
+        words=[parent["word"] for parent in ParentRepository.find_by_condition("part_of_speech", PartsOfSpeech.NOUN.value)],
+        children=[]
+    )
+
+
 @app.route('/children_registration', methods=['GET', 'POST'])
 def children_registration():
     input_word = request.form.get("word")
@@ -69,6 +80,22 @@ def children_registration():
         parents=ParentRepository.find_values_by_column("word"),
         registration_result_children=registration_result_children,
         registration_result_parents="Nothing registered yet."
+    )
+
+
+@app.route('/show_children_list', methods=['GET', 'POST'])
+def show_children_list():
+    selected_part_of_speech = request.form.get("part_of_speech", default=PartsOfSpeech.NOUN.value)
+    selected_word = request.form.get("word")
+
+    return render_template(
+        'edit.html',
+        page_title='Edit',
+        selected_part_of_speech=selected_part_of_speech,
+        selected_word=selected_word,
+        parts_of_speech=PartsOfSpeech,
+        words=[parent["word"] for parent in ParentRepository.find_by_condition("part_of_speech", selected_part_of_speech)],
+        children=[child["word"] for child in ChildrenRepository.find_by_condition("parent", selected_word)]
     )
 
 

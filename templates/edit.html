@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/edit.css') }}">
+{% endblock %}
+
+{% block content %}
+<form action="/show_children_list" method="post">
+    <legend>Show Children</legend>
+
+    <select id="part_of_speech" name="part_of_speech" onchange="this.form.submit()">
+        {% for part in parts_of_speech %}
+            <option value="{{ part.value }}" {% if part.value == selected_part_of_speech %}selected{% endif %}>{{ part.value }}</option>
+        {% endfor %}
+    </select>
+
+    <select id="word" name="word" onchange="this.form.submit()">
+        {% for word in words %}
+            <option value="{{ word }}" {% if word == selected_word %}selected{% endif %}>{{ word }}</option>
+        {% endfor %}
+    </select>
+
+    <table>
+        <tr>
+            <th>Children List</th>
+        </tr>
+        {% for child in children %}
+        <tr>
+            <td>{{ child }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+{% endblock %}
