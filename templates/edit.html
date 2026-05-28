@@ -8,15 +8,17 @@
 <form action="/show_children_list" method="post">
     <legend>Show Children</legend>
 
+    <label for="part_of_speech">Part of Speech:</label>
     <select id="part_of_speech" name="part_of_speech" onchange="this.form.submit()">
         {% for part in parts_of_speech %}
             <option value="{{ part.value }}" {% if part.value == selected_part_of_speech %}selected{% endif %}>{{ part.value }}</option>
         {% endfor %}
     </select>
 
-    <select id="word" name="word" onchange="this.form.submit()">
-        {% for word in words %}
-            <option value="{{ word }}" {% if word == selected_word %}selected{% endif %}>{{ word }}</option>
+    <label for="parent">Parent:</label>
+    <select id="parent" name="parent" onchange="this.form.submit()">
+        {% for parent in parents %}
+            <option value="{{ parent }}" {% if parent == selected_word %}selected{% endif %}>{{ parent }}</option>
         {% endfor %}
     </select>
 
