@@ -18,7 +18,7 @@
     <label for="parent">Parent:</label>
     <select id="parent" name="parent" onchange="this.form.submit()">
         {% for parent in parents %}
-            <option value="{{ parent }}" {% if parent == selected_word %}selected{% endif %}>{{ parent }}</option>
+            <option value="{{ parent }}" {% if parent == selected_parent %}selected{% endif %}>{{ parent }}</option>
         {% endfor %}
     </select>
 
